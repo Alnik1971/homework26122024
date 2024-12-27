@@ -6,7 +6,9 @@ import lombok.experimental.FieldDefaults;
 import ru.netology.SpringHibernate.entity.Person;
 import ru.netology.SpringHibernate.repository.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
@@ -20,7 +22,11 @@ public class Service {
         this.repository = repository;
     }
 
-    public List<Person> getPersonByCity(String city){
-        return repository.getPersonByCity(city);
+    public List<Person> getPersonByCity(String city){return repository.findPersonByCityOfLiving(city);
+    }
+    public List<Person> getPersonByAge(int age) {return repository.findAllByPersonId_AgeLessThanOrderByPersonId_Age(age);
+    }
+    public Optional<Person> getPersonByNameAndSurname(String name, String surname) {
+        return repository.findPersonByPersonId_NameAndPersonId_Surname(name, surname);
     }
 }
